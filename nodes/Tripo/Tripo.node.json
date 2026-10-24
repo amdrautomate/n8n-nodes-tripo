@@ -1,0 +1,19 @@
+{
+	"node": "@amdrautomate/n8n-nodes-tripo.tripo",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Marketing & Content"],
+	"alias": ["3D", "3D model", "Text to 3D", "Image to 3D", "GLB", "FBX", "Rigging", "Retopology", "Tripo3D"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/amdrautomate/n8n-nodes-tripo#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/amdrautomate/n8n-nodes-tripo#readme"
+			}
+		]
+	}
+}
