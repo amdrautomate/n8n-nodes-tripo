@@ -3,6 +3,7 @@
 ## 0.1.0
 
 - Initial release, built on the Tripo API v3.
+- Credential with **Region** (International `openapi.tripo3d.ai` or China mainland `openapi.tripo3d.com`); keys are only valid on the region they were created in.
 - **Model**: Text to Model, Image to Model, Multiview to Model (H series v3.1/v3.0/v2.5 and P series P2/P1), Image to Splat, Texture (text, single-image or multiview guidance), Convert (GLTF, FBX, USDZ, OBJ, STL, 3MF), Import.
 - **Image**: Text to Image, Image to Image, Image to Multiview, Edit Multiview (Seedream, Banana and Chat Image models).
 - **Animation**: Rig Check, Rig (v1.0 / v2.5 / v3.0, skeleton specs), Retarget (up to five presets).

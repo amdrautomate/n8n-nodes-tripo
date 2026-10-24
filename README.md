@@ -16,9 +16,9 @@ To let AI agents use the node as a tool on self-hosted n8n, set `N8N_COMMUNITY_P
 
 The node authenticates with a Tripo **API key** (sent as `Authorization: Bearer`).
 
-1. Create an account at the [Tripo developer console](https://developers.tripo3d.com) (new accounts get free credits).
+1. Create an account in the Tripo developer console: [developers.tripo3d.ai](https://developers.tripo3d.ai) for international accounts (card billing) or [developers.tripo3d.com](https://developers.tripo3d.com) for China mainland.
 2. Open **API Keys** and create a key (it starts with `tsk_`). Copy it; it is shown once.
-3. Paste it into the **Tripo API** credential in n8n and click **Test**. The test reads your credit balance.
+3. In n8n create a **Tripo API** credential, pick the **Region** that matches the site you signed up on, paste the key and click **Test**. The test reads your credit balance. A key used on the wrong region fails with `Invalid API key`.
 
 Every task is billed in credits to the account that owns the key. Credits are frozen when a task starts and released again if it fails or is cancelled. Prices per task type are on the [Tripo pricing page](https://developers.tripo3d.com/en/docs/billing).
 
@@ -77,7 +77,7 @@ The node is marked `usableAsTool`. Add it to an AI Agent, pick a resource and op
 
 ## Compatibility
 
-Built and tested with n8n 2.43 (Node.js 20 and 24). Uses the Tripo API v3 at `https://openapi.tripo3d.com/v3`.
+Built and tested with n8n 2.43 (Node.js 20 and 24). Uses the Tripo API v3 (`https://openapi.tripo3d.ai/v3` for international accounts, `https://openapi.tripo3d.com/v3` for China mainland).
 
 ## Resources
 

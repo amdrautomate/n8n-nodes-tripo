@@ -17,6 +17,25 @@ export class TripoApi implements ICredentialType {
 
 	properties: INodeProperties[] = [
 		{
+			displayName: 'Region',
+			name: 'region',
+			type: 'options',
+			options: [
+				{
+					name: 'International (developers.tripo3d.ai)',
+					value: 'international',
+					description: 'Accounts created on developers.tripo3d.ai (card billing); API host openapi.tripo3d.ai',
+				},
+				{
+					name: 'China Mainland (developers.tripo3d.com)',
+					value: 'china',
+					description: 'Accounts created on developers.tripo3d.com; API host openapi.tripo3d.com',
+				},
+			],
+			default: 'international',
+			description: 'The Tripo site where the account was created. Keys only work on their own region.',
+		},
+		{
 			displayName: 'API Key',
 			name: 'apiKey',
 			type: 'string',
@@ -25,7 +44,7 @@ export class TripoApi implements ICredentialType {
 			required: true,
 			placeholder: 'tsk_...',
 			description:
-				'Create one in the Tripo developer console (developers.tripo3d.com > API Keys). Tasks are billed in credits to the account that owns the key.',
+				'Create one in the Tripo developer console under API Keys (developers.tripo3d.ai or developers.tripo3d.com, matching the Region). Tasks are billed in credits to the account that owns the key.',
 		},
 	];
 
@@ -40,7 +59,8 @@ export class TripoApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'https://openapi.tripo3d.com/v3',
+			baseURL:
+				'={{$credentials.region === "china" ? "https://openapi.tripo3d.com/v3" : "https://openapi.tripo3d.ai/v3"}}',
 			url: '/account/balance',
 			method: 'GET',
 		},

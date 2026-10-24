@@ -10,9 +10,19 @@ import {
 } from 'n8n-workflow';
 import { encodeMultipart, type MultipartFile } from './multipart';
 
-export const TRIPO_BASE_URL = 'https://openapi.tripo3d.com/v3';
+/** API hosts per account region (keys are only valid on the region they were created in). */
+export const TRIPO_BASE_URLS: Record<string, string> = {
+	international: 'https://openapi.tripo3d.ai/v3',
+	china: 'https://openapi.tripo3d.com/v3',
+};
 export const USER_AGENT = 'n8n-nodes-tripo';
 const CREDENTIAL = 'tripoApi';
+
+/** Resolves the API base URL from the credential's Region field (defaults to international). */
+export async function getBaseUrl(this: IExecuteFunctions): Promise<string> {
+	const credentials = (await this.getCredentials(CREDENTIAL)) as { region?: string };
+	return TRIPO_BASE_URLS[credentials.region ?? 'international'] ?? TRIPO_BASE_URLS.international;
+}
 
 export interface TripoRequest {
 	method: IHttpRequestMethods;
@@ -28,7 +38,7 @@ export interface TripoRequest {
 const CODE_HINTS: Record<number, string> = {
 	1000: 'The API key is not valid or was deleted. Check the Tripo API credential.',
 	1001: 'The request had no Authorization header. Check the Tripo API credential.',
-	1004: 'A parameter is not valid for the chosen model version (for example texture_quality "fast" without texture model v3.5, or smart_uv without retopology v3.0).',
+	1004: 'A parameter is not valid: wrong format (task IDs are UUIDs) or not allowed for the chosen model version (for example texture_quality "fast" without texture model v3.5, or smart_uv without retopology v3.0).',
 	1007: 'Tripo rate limit reached. Reduce the request rate and retry with back-off.',
 	2000: 'Too many tasks of this category are running at once (default 10 per category, 5 for P series and model processing, 1 for image generation). Wait for one to finish.',
 	2002: 'A request field name or value is not supported. Check the parameters against the Tripo docs.',
@@ -108,9 +118,10 @@ export async function tripoRequest(
 		body = JSON.stringify(request.body);
 	}
 
+	const baseUrl = await getBaseUrl.call(this);
 	const options: IHttpRequestOptions = {
 		method: request.method,
-		url: `${TRIPO_BASE_URL}${request.path}`,
+		url: `${baseUrl}${request.path}`,
 		qs: request.qs,
 		headers,
 		body,
