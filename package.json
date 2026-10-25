@@ -1,6 +1,6 @@
 {
   "name": "@amdrautomate/n8n-nodes-tripo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "n8n community node for Tripo (Tripo3D): generate 3D models from text, images or multiview photos, texture, convert, retopologize, segment, rig and animate them, generate images and multiviews, and poll tasks with the Tripo API v3",
   "license": "MIT",
   "homepage": "https://github.com/amdrautomate/n8n-nodes-tripo",

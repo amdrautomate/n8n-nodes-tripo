@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1
+
+- Published through npm Trusted Publishing (GitHub Actions OIDC, no long-lived token). No functional changes.
+
 ## 0.1.0
 
 - Initial release, built on the Tripo API v3.
